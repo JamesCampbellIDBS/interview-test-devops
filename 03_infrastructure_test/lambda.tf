@@ -1,5 +1,4 @@
 terraform {
-  backend "s3" {}
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -13,8 +12,8 @@ data "aws_caller_identity" "this" {}
 # Setting locals, for consistent naming & avoiding duplication
 locals {
   backup_resource_name = "rds-backup-${var.env}-${terraform.workspace}"
-  copy_resource_name = "rds-copy-${var.env}-${terraform.workspace}"
-  aws_acc_id            = data.aws_caller_identity.this.account_id
+  copy_resource_name   = "rds-copy-${var.env}-${terraform.workspace}"
+  aws_acc_id           = data.aws_caller_identity.this.account_id
   tags = {
     resource_owner = var.resource_owner
     created_by     = "Terraform"
@@ -45,7 +44,7 @@ resource "aws_lambda_function" "rds_backup" {
 
   environment {
     variables = {
-      SNS_ARN = aws_sns_topic.rds-backup-sns.arn
+      SNS_ARN   = aws_sns_topic.rds-backup-sns.arn
       DB_PREFIX = var.database_prefix
     }
   }
@@ -111,7 +110,7 @@ resource "aws_cloudwatch_event_rule" "copy_lambda_trigger" {
   is_enabled          = var.schedule_enabled
 }
 
-resource "aws_cloudwatch_event_target" "backup_lambda_target" {
+resource "aws_cloudwatch_event_target" "copy_lambda_target" {
   rule = aws_cloudwatch_event_rule.copy_lambda_trigger.name
   arn  = aws_lambda_function.rds_backup.function_name
 }

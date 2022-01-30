@@ -1,7 +1,7 @@
 
 resource "aws_iam_role" "rds_backup_role" {
   permissions_boundary = var.permissions_boundary
-  name = "rds-backup-${local.general_resource_name}-role"
+  name                 = "rds-backup-${local.general_resource_name}-role"
 
   assume_role_policy = <<EOF
 {
@@ -79,7 +79,7 @@ EOF
 
 resource "aws_iam_role" "rds_copy_role" {
   permissions_boundary = var.permissions_boundary
-  name = "rds-copy-${local.general_resource_name}-role"
+  name                 = "rds-copy-${local.general_resource_name}-role"
 
   assume_role_policy = <<EOF
 {

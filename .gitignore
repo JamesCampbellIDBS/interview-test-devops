@@ -1,3 +1,6 @@
 .terraform/
+*/.terraform/
+*/.terraform*
 .idea/*
-/venv/
+/*/venv/
+venv/

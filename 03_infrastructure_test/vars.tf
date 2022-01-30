@@ -35,24 +35,24 @@ variable "lambda_memory_size" {
   default     = 5120
 }
 
-variable backup_schedule {
+variable "backup_schedule" {
   type        = string
   description = "The cron expression to run the backup lambda on"
 }
 
-variable copy_schedule {
+variable "copy_schedule" {
   type        = string
   description = "The cron expression to run the copy backup lambda on"
 }
 
-variable schedule_enabled {
+variable "schedule_enabled" {
   type        = string
   description = "Boolean. If true, the lambda is triggered according to `schedule`. Defaults to true."
   default     = true
 }
 
-variable database_prefix {
-  type = string
+variable "database_prefix" {
+  type        = string
   description = "The prefix of the database names to backup. E.g. sreprodbd. Where a full name might be sreprod<customer>"
-  default =
+  default     = "sreprod"
 }
