@@ -9,7 +9,6 @@ logger = logging.getLogger('take_rds_backups')
 logger.setLevel(logging.INFO)
 
 
-# Shared functions
 def take_rds_backups(region):
     rds = boto3.client('rds', region)
     sns_client = boto3.client('sns')
